@@ -1,0 +1,21 @@
+@import '/src/setting';
+
+$column-border-radius: 7px;
+
+$scroll-bg-color: rgba(255, 255, 255, 0.24);
+
+.board-content{
+    display: flex;
+    margin: 0 $gap $gap;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+    &::-webkit-scrollbar:horizontal {
+        height: 11px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: $scroll-bg-color;
+        border-radius: $column-border-radius;
+    }
+}

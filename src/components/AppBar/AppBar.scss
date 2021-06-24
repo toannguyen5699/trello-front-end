@@ -1,0 +1,11 @@
+@import '/src/setting';
+
+$trello-bg-color: #2567e2;
+
+.navbar-trello {
+    background-color: $trello-bg-color;
+    font-size: 1.5rem;
+    padding-left: $gap;
+    display: flex;
+    align-items: center;
+}
