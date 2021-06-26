@@ -3,6 +3,7 @@
 $trello-bg-color: #2567e2;
 
 .navbar-trello {
+    height: $navbar-app-height;
     background-color: $trello-bg-color;
     font-size: 1.5rem;
     padding-left: $gap;
