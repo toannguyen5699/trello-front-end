@@ -8,14 +8,12 @@ $card-border-radius: 4px;
 $trello-bg-color: #2567e2;
 $column-bg-color: #f7f7f7;
 $scroll-bg-color: rgba(255, 255, 255, 0.24);
+$column-height: calc(#{$board-content-height} - #{$gap * 2});
 
 .column {
     flex: 0 0 auto;
     width: 400px;
-    height: calc(100% - #{$gap});
-    &:not(:first-child) {
-        margin-left: $gap;
-    }
+    height: $column-height;
     margin-left: $gap;
     > * {
         background-color: $column-bg-color;
@@ -30,6 +28,7 @@ $scroll-bg-color: rgba(255, 255, 255, 0.24);
         font-weight: bold;
         border-top-left-radius: $column-border-radius;
         border-top-right-radius: $column-border-radius;
+        cursor: pointer;
     }
     footer {
         padding-left: 10px;
@@ -38,10 +37,9 @@ $scroll-bg-color: rgba(255, 255, 255, 0.24);
         border-bottom-left-radius: $column-border-radius;
         border-bottom-right-radius: $column-border-radius;
     }
-    ul.list-card {
-        list-style-type: none;
+    .list-card {
         margin: 0;
-        max-height: calc(100% - #{$column-header-height - #{$column-footer-height}});
+        max-height: calc(#{$column-height} - #{$column-header-height - #{$column-footer-height}});
         overflow-y: auto;
         &::-webkit-scrollbar {
             -webkit-appearance: none;
@@ -52,6 +50,21 @@ $scroll-bg-color: rgba(255, 255, 255, 0.24);
         &::-webkit-scrollbar-thumb {
             background-color: darken($column-bg-color, 15);
             border-right: 5px $column-bg-color solid;
+        }
+        .card-ghost {
+            transition: transform 0.18s ease;
+            transform: rotateZ(5deg)
+        }
+          
+        .card-ghost-drop{
+        transition: transform 0.18s ease-in-out;
+        transform: rotateZ(0deg)
+        }
+
+        .drop-preview {
+            background-color: rgba(150, 150, 200, 0.1);
+            border: 1px dashed #abc;
+            margin: 5px;
         }
     }
 }
