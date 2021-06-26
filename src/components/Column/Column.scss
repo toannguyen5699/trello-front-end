@@ -12,12 +12,11 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
 
 .column {
     flex: 0 0 auto;
-    width: 400px;
+    width: 32vh;
     height: $column-height;
     margin-left: $gap;
     > * {
         background-color: $column-bg-color;
-        color: #333;
         padding: 0 8px;
     }
     header {
@@ -36,6 +35,14 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
         line-height: 36px;
         border-bottom-left-radius: $column-border-radius;
         border-bottom-right-radius: $column-border-radius;
+        color: #888;
+        .footer-actions {
+            margin-left: 10px;
+            cursor: pointer;
+            &:hover {
+                color: $app-main-text-color;
+            }
+        }
     }
     .list-card {
         margin: 0;
