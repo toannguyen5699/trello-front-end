@@ -9,6 +9,10 @@ $scroll-bg-color: rgba(255, 255, 255, 0.24);
     height: $board-content-height;
     overflow-x: auto;
     overflow-y: hidden;
+    &:after {
+        content: '';
+        flex: 0 0 $gap;
+    }
     &::-webkit-scrollbar {
         -webkit-appearance: none;
     }
@@ -27,9 +31,8 @@ $scroll-bg-color: rgba(255, 255, 255, 0.24);
       }
 
     .add-column {
-        flex: 0 0 auto;
+        max-width: 32vh;
         width: 32vh;
-        height: 32px;
         line-height: 32px;
         padding: 4px 0 4px 15px;
         cursor: pointer;
@@ -40,6 +43,31 @@ $scroll-bg-color: rgba(255, 255, 255, 0.24);
         border-radius: $column-border-radius;
         &:hover {
             background-color: hsla(0, 0%, 100%, .34);
+        }
+    }
+
+    .add-name-column {
+        max-width: 32vh;
+        width: 32vh;
+        background-color: $column-bg-color;
+        line-height: 32px;
+        padding: 4px 10px;
+        margin-left: $gap;
+        border-radius: $column-border-radius;
+        input.input-title-column {
+            height: 40px;
+            margin: 5px 0;
+        }
+        span.cancel-new-column {
+            margin-left: $gap;
+            cursor: pointer;
+            i {
+                font-size: 18px;
+                color: $alert-danger;
+                &:hover {
+                    color: darken($alert-danger, 10)
+                }
+            }
         }
     }
 }
