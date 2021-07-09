@@ -57,6 +57,10 @@ $scroll-bg-color: rgba(255, 255, 255, 0.24);
         input.input-title-column {
             height: 40px;
             margin: 5px 0;
+            &:focus {
+                background-color: white;
+                border: 1px solid $input-border-color;
+            }
         }
         span.cancel-new-column {
             margin-left: $gap;

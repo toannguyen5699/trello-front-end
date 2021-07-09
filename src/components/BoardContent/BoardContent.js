@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { isEmpty } from 'lodash';
 import { Container, Draggable } from 'react-smooth-dnd'
 import { Container as BootstrapContainer, Row, Col, Form, Button } from 'react-bootstrap';
@@ -14,9 +14,9 @@ function BoardContent() {
   const [columns, setColumns] = useState([])
   const [isInput, setIsInput] = useState(false)
   const [newColumnTitle, setNewColumnTitle] = useState('')
-  const onNewColumnTitleChange = useCallback((e) => {
+  const onNewColumnTitleChange = (e) => {
     setNewColumnTitle(e.target.value)
-  }, [])
+  }
 
   const newColumnInputRef = useRef(null)
 
@@ -75,6 +75,19 @@ function BoardContent() {
     setIsInput(!isInput)
   }
 
+  const onUpdateColumn = (newColumnToUpdate) => {
+    const columnIdToUpdate = newColumnToUpdate.id
+    let newColumns = [...columns]
+    const columnIndexToUpdate = newColumns.findIndex(i => i.id === columnIdToUpdate)
+    // remove column
+    if (newColumnToUpdate._destroy) {
+      newColumns.splice(columnIndexToUpdate, 1)
+    } else {
+      newColumns.splice(columnIndexToUpdate, 1, newColumnToUpdate)
+    }
+    newColumnsToAdd(newColumns)
+  }
+
   const addNewColumn = () => {
     if (!newColumnTitle) {
       newColumnInputRef.current.focus()
@@ -112,7 +125,7 @@ function BoardContent() {
       >
         {columns.map((column, index) => (
           <Draggable key={index}>
-            <Column column={column} onCardDrop={onCardDrop} />
+            <Column column={column} onCardDrop={onCardDrop} onUpdateColumn={onUpdateColumn} />
           </Draggable>
         ))}
       </Container>
