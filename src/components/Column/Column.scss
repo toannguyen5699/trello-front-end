@@ -73,6 +73,7 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
         padding-left: 10px;
         height: $column-footer-height;
         line-height: 36px;
+        min-height: 10px;
         border-bottom-left-radius: $column-border-radius;
         border-bottom-right-radius: $column-border-radius;
         color: #888;
@@ -114,6 +115,13 @@ $column-height: calc(#{$board-content-height} - #{$gap * 2});
             background-color: rgba(150, 150, 200, 0.1);
             border: 1px dashed #abc;
             margin: 5px;
+        }
+
+        .add-new-card-area {
+            .input-new-card {
+                min-height: 54px;
+                max-height: 169px;
+            }
         }
     }
 }

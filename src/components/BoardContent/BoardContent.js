@@ -13,6 +13,10 @@ function BoardContent() {
   const [board, setBoard] = useState({})
   const [columns, setColumns] = useState([])
   const [isInput, setIsInput] = useState(false)
+  const toggleOpenInput = () => {
+    setIsInput(!isInput)
+  }
+
   const [newColumnTitle, setNewColumnTitle] = useState('')
   const onNewColumnTitleChange = (e) => {
     setNewColumnTitle(e.target.value)
@@ -30,14 +34,14 @@ function BoardContent() {
       // sort column theo columnOrder
       setColumns(mapOrder(boardFromDB.columns, boardFromDB.columnOrder, 'id'));
     }
-  }, []);
+  }, [])
 
   useEffect(() => {
     if (newColumnInputRef && newColumnInputRef.current) {
       newColumnInputRef.current.focus()
       newColumnInputRef.current.select()
     }
-  }, [isInput]);
+  }, [isInput])
 
   if (isEmpty(board)) {
     return <div className="not-found">Board not found!</div>;
@@ -71,10 +75,6 @@ function BoardContent() {
     }
   }
 
-  const toggleOpenInput = () => {
-    setIsInput(!isInput)
-  }
-
   const onUpdateColumn = (newColumnToUpdate) => {
     const columnIdToUpdate = newColumnToUpdate.id
     let newColumns = [...columns]
@@ -88,7 +88,7 @@ function BoardContent() {
     newColumnsToAdd(newColumns)
   }
 
-  const addNewColumn = () => {
+  const addNewColumn = (newColumnToUpdate) => {
     if (!newColumnTitle) {
       newColumnInputRef.current.focus()
       return
@@ -125,7 +125,11 @@ function BoardContent() {
       >
         {columns.map((column, index) => (
           <Draggable key={index}>
-            <Column column={column} onCardDrop={onCardDrop} onUpdateColumn={onUpdateColumn} />
+            <Column 
+              column={column}
+              onCardDrop={onCardDrop}
+              onUpdateColumn={onUpdateColumn}
+            />
           </Draggable>
         ))}
       </Container>
@@ -152,7 +156,7 @@ function BoardContent() {
               onKeyDown={event => (event.key === 'Enter') && addNewColumn()}
             />
             <Button variant="success" size="sm" onClick={addNewColumn}>Add Column</Button>
-            <span className="cancel-new-column">
+            <span className="btn-trash-icon">
               <i className="fa fa-trash icon" onClick={toggleOpenInput} />
             </span>
           </Col>
